@@ -1,0 +1,3 @@
+services:
+  Status.Api.controllers.StatusGetController:
+    class: ../../controller/StatusGetController

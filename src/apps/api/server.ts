@@ -1,10 +1,11 @@
+import 'dotenv/config'
 import express, { Application, NextFunction, Request, Response } from 'express'
 import Router from 'express-promise-router'
-import { loadContainer } from './dependecy_injection/index'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import * as http from 'http'
 import { registerRoutes } from './routes'
+import { loadContainer } from './dependecy_injection'
 
 export class Server {
   private appExpress: Application
@@ -19,10 +20,13 @@ export class Server {
     loadContainer.then(() => {
       const router = Router()
       registerRoutes(router)
-      this.appExpress.use(router)
+      this.appExpress.use('/api', router)
+
+      console.log(router.all)
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       router.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
+        console.error(err)
         res.status(500).send(err.message)
       })
     })
@@ -33,7 +37,7 @@ export class Server {
     return new Promise<void>((resolve) => {
       this.httpServer = this.appExpress.listen(this.port, () => {
         console.log(
-          `ApiServer is running at the port ${this.port} on http://localhost:${this.port} in ${process.env.ENV} environment`,
+          `ApiServer is running at the port ${this.port} on http://localhost:${this.port}/api in ${process.env.ENV} environment`,
         )
         resolve()
       })

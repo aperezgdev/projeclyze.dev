@@ -1,0 +1,4 @@
+imports:
+  - { resource: ./Task/application_test.yaml }
+  - { resource: ./User/application_test.yaml }
+  - { resource: ./Status/application.yaml }

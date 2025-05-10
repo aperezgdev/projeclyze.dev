@@ -1,0 +1,28 @@
+services:
+  User.Api.controllers.UserGetController:
+    class: ../../controller/User/UserGetController
+
+  User.Api.controllers.UserPostController:
+    class: ../../controller/User/UserPostController
+
+  User.Api.controllers.UserPutController:
+    class: ../../controller/User/UserPutController
+
+  User.Context.infrastructure.UserRepository:
+    class: ../../../../context/User/infrastructure/InMemoryUserRepository
+
+  User.Context.application.UserCreator:
+    class: ../../../../context/User/application/UserCreator
+    arguments: ['@User.Context.infrastructure.UserRepository']
+
+  User.Context.application.UserUpdater:
+    class: ../../../../context/User/application/UserUpdater
+    arguments:
+      [
+        '@User.Context.infrastructure.UserRepository',
+        '@User.Context.application.UserFinder',
+      ]
+
+  User.Context.application.UserFinder:
+    class: ../../../../context/User/application/UserFinder
+    arguments: ['@User.Context.infrastructure.UserRepository']

@@ -1,0 +1,43 @@
+services:
+  Task.Api.controllers.TaskGetController:
+    class: ../../controller/Task/TaskGetController
+
+  Task.Api.controllers.TaskPostController:
+    class: ../../controller/Task/TaskPostController
+
+  Task.Api.controllers.TaskPutController:
+    class: ../../controller/Task/TaskPutController
+
+  Task.Api.controllers.TaskDeleteController:
+    class: ../../controller/Task/TaskDeleteController
+
+  Task.Context.infrastructure.TaskRepository:
+    class: ../../../../context/Task/infrastructure/InMemoryTaskRepository
+
+  Task.Context.application.TaskCreator:
+    class: ../../../../context/Task/application/TaskCreator
+    arguments: ['@Task.Context.infrastructure.TaskRepository']
+
+  Task.Context.application.TaskUpdater:
+    class: ../../../../context/Task/application/TaskUpdater
+    arguments:
+      [
+        '@Task.Context.infrastructure.TaskRepository',
+        '@Task.Context.application.TaskFinder',
+      ]
+
+  Task.Context.application.TaskRemover:
+    class: ../../../../context/Task/application/TaskRemover
+    arguments:
+      [
+        '@Task.Context.infrastructure.TaskRepository',
+        '@Task.Context.application.TaskFinder',
+      ]
+
+  Task.Context.application.TaskOwnerSearcher:
+    class: ../../../../context/Task/application/TaskOwnerSearcher
+    arguments: ['@Task.Context.infrastructure.TaskRepository']
+
+  Task.Context.application.TaskFinder:
+    class: ../../../../context/Task/domain/TaskFinder
+    arguments: ['@Task.Context.infrastructure.TaskRepository']

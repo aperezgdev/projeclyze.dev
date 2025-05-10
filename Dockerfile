@@ -1,6 +1,6 @@
 FROM node:slim AS tester
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json ./
 RUN npm install -g pnpm && pnpm install
 COPY . .
 RUN pnpm test:api

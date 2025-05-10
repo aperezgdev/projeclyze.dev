@@ -9,10 +9,11 @@
     "rootDir": ".",
     "strict": true,
     "noEmit": false,
+    "skipLibCheck": true,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
     "outDir": "./dist"
   },
   "include": ["src/**/**.ts", "tests/**/**.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

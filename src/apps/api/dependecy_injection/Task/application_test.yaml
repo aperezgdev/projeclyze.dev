@@ -1,15 +1,15 @@
 services:
   Task.Api.controllers.TaskGetController:
-    class: ../../controller/TaskGetController
+    class: ../../controller/Task/TaskGetController
 
   Task.Api.controllers.TaskPostController:
-    class: ../../controller/TaskPostController
+    class: ../../controller/Task/TaskPostController
 
   Task.Api.controllers.TaskPutController:
-    class: ../../controller/TaskPutController
+    class: ../../controller/Task/TaskPutController
 
   Task.Api.controllers.TaskDeleteController:
-    class: ../../controller/TaskDeleteController
+    class: ../../controller/Task/TaskDeleteController
 
   Task.Context.infrastructure.TaskRepository:
     class: ../../../../context/Task/infrastructure/InMemoryTaskRepository

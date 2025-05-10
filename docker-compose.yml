@@ -8,14 +8,39 @@ services:
       - ENV=${ENV}
       - PORT=${PORT}
       - DB_URL=${DB_URL}
+    depends_on:
+      - database
+    networks:
+      - projeclyze.dev
 
   database:
     image: postgres:17.1-alpine
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB}
     ports:
       - '${DATABASE_PORT}:${DATABASE_PORT}'
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    networks:
+      - projeclyze.dev
+
+  pgadmin:
+    image: dpage/pgadmin4:4.23
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+      - PGADMIN_LISTEN_PORT=80
+    ports:
+      - '${PGADMIN_PORT}:80'
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - database
+    networks:
+      - projeclyze.dev
+
+networks:
+  projeclyze.dev:
+    name: projeclyze.dev

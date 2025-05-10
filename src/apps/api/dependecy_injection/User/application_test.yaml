@@ -1,12 +1,12 @@
 services:
   User.Api.controllers.UserGetController:
-    class: ../../controller/UserGetController
+    class: ../../controller/User/UserGetController
 
   User.Api.controllers.UserPostController:
-    class: ../../controller/UserPostController
+    class: ../../controller/User/UserPostController
 
   User.Api.controllers.UserPutController:
-    class: ../../controller/UserPutController
+    class: ../../controller/User/UserPutController
 
   User.Context.infrastructure.UserRepository:
     class: ../../../../context/User/infrastructure/InMemoryUserRepository

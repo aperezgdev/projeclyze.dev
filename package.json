@@ -11,7 +11,11 @@
     "build": "pnpm run build:tsc && pnpm run build:di",
     "lint": "eslint --ext .",
     "lint:fix": "eslint --fix .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "start": "node dist/src/apps/api/index.js"
   },
   "keywords": [],
   "author": "aperezgdev",
@@ -32,7 +36,7 @@
     "drizzle-kit": "^0.31.1",
     "eslint": "^9.26.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.6",
+    "eslint-plugin-prettier": "^5.3.1",
     "nodemon": "^3.1.10",
     "prettier": "^3.5.3",
     "supertest": "^6.3.4",

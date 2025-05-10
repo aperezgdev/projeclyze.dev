@@ -17,12 +17,14 @@ export class Server {
     this.appExpress = express()
     this.appExpress.use(cors())
     this.appExpress.use(bodyParser.json())
-    loadContainer.then(() => {
+  }
+
+  async start() {
+    console.log('Starting ApiServer')
+    await loadContainer().then(() => {
       const router = Router()
       registerRoutes(router)
       this.appExpress.use('/api', router)
-
-      console.log(router.all)
 
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       router.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
@@ -30,10 +32,6 @@ export class Server {
         res.status(500).send(err.message)
       })
     })
-  }
-
-  async start() {
-    await loadContainer
     return new Promise<void>((resolve) => {
       this.httpServer = this.appExpress.listen(this.port, () => {
         console.log(

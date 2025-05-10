@@ -7,7 +7,7 @@ RUN pnpm test:api
 
 FROM node:slim AS builder
 WORKDIR /app
-COPY package.json pnpm-lock.yaml ./
+COPY package.json ./
 RUN npm install -g pnpm && pnpm install
 COPY . .
 

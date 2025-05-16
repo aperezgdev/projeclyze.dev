@@ -1,5 +1,5 @@
 import { User } from '../domain/User'
-import { UserFinderDomain } from '../domain/UserFinderUserFinderDomain'
+import { UserFinderDomain } from '../domain/UserFinderDomain'
 import { UserRepository } from '../domain/UserRepository'
 
 export class UserFinder {

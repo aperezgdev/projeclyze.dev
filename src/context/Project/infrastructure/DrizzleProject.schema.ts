@@ -26,7 +26,7 @@ export const projectToUser = pgTable(
   (t) => [primaryKey({ columns: [t.project_id, t.user_id] })],
 )
 
-const projectToUserRelationships = relations(projectToUser, ({ one }) => ({
+export const projectToUserRelationships = relations(projectToUser, ({ one }) => ({
   project_id: one(project, {
     fields: [projectToUser.project_id],
     references: [project.id],

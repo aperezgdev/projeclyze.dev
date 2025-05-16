@@ -5,11 +5,12 @@ import { ProjectDescription } from './value-object/ProjectDescription'
 import { ProjectMembers } from './value-object/ProjectMembers'
 import { ProjectTitle } from './value-object/ProjectTitle'
 
-interface ProjectPrimitives {
+export interface ProjectPrimitives {
   id: string
   title: string
   description: string
   owner: string
+  members: string[]
   createdOn: string
   updatedOn: string
 }
@@ -49,6 +50,7 @@ export class Project {
       new ProjectTitle(title),
       new ProjectDescription(description),
       ownerVO,
+      new ProjectMembers([ownerVO]),
       new CreatedOnValueObject(),
       new UpdatedOnValueObject(),
     )
@@ -72,6 +74,7 @@ export class Project {
       titleVO,
       descriptionVO,
       ownerVO,
+      this.members,
       this.createdOn,
       new UpdatedOnValueObject(),
     )
@@ -82,7 +85,20 @@ export class Project {
       this.id,
       this.title,
       this.description,
-      this.me,
+      this.owner,
+      this.members.add(member),
+      this.createdOn,
+      this.updatedOn,
+    )
+  }
+
+  removeMember(member: Uuidv7): Project {
+    return new Project(
+      this.id,
+      this.title,
+      this.description,
+      this.owner,
+      this.members.remove(member),
       this.createdOn,
       this.updatedOn,
     )
@@ -94,6 +110,7 @@ export class Project {
       title: this.title.value,
       description: this.description.value,
       owner: this.owner.value,
+      members: this.members.value.map((m) => m.value),
       createdOn: this.createdOn.value.toISOString(),
       updatedOn: this.updatedOn.value.toISOString(),
     }
@@ -104,6 +121,7 @@ export class Project {
     title,
     description,
     owner,
+    members,
     createdOn,
     updatedOn,
   }: ProjectPrimitives): Project {
@@ -114,6 +132,7 @@ export class Project {
       new ProjectTitle(title),
       new ProjectDescription(description),
       ownerVO,
+      new ProjectMembers(members.map((m) => new Uuidv7(m))),
       new CreatedOnValueObject(new Date(createdOn)),
       new UpdatedOnValueObject(new Date(updatedOn)),
     )

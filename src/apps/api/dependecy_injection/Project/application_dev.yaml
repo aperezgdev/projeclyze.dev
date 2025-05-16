@@ -1,0 +1,54 @@
+services:
+  Project.Api.controller.ProjectGetController:
+    class: ../../../../apps/api/controller/Project/ProjectGetController
+  Project.Api.controller.ProjectPostController:
+    class: ../../../../apps/api/controller/Project/ProjectPostController
+  Project.Api.controller.ProjectPutController:
+    class: ../../../../apps/api/controller/Project/ProjectPutController
+  Project.Api.controller.ProjectDeleteController:
+    class: ../../../../apps/api/controller/Project/ProjectDeleteController
+  Project.Api.controller.ProjectPutMemberController:
+    class: ../../../../apps/api/controller/Project/ProjectPutMemberController
+  Project.Api.controller.ProjectDeleteMemberController:
+    class: ../../../../apps/api/controller/Project/ProjectDeleteMemberController
+
+  Project.Context.application.ProjectOwnerSearcher:
+    class: ../../../../context/Project/application/ProjectOwnerSearcher
+    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+
+  Project.Context.application.ProjectCreator:
+    class: ../../../../context/Project/application/ProjectCreator
+    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+  Project.Context.application.ProjectUpdater:
+    class: ../../../../context/Project/application/ProjectUpdater
+    arguments:
+      [
+        '@Project.Context.infrastructure.ProjectRepository',
+        '@Project.Context.domain.ProjectFinder',
+      ]
+  Project.Context.application.ProjectRemover:
+    class: ../../../../context/Project/application/ProjectRemover
+    arguments:
+      [
+        '@Project.Context.infrastructure.ProjectRepository',
+        '@Project.Context.domain.ProjectFinder',
+      ]
+  Project.Context.application.ProjectAddMember:
+    class: ../../../../context/Project/application/ProjectAddMember
+    arguments:
+      [
+        '@Project.Context.infrastructure.ProjectRepository',
+        '@Project.Context.domain.ProjectFinder',
+      ]
+  Project.Context.application.ProjectRemoveMember:
+    class: ../../../../context/Project/application/ProjectRemoveMember
+    arguments:
+      [
+        '@Project.Context.infrastructure.ProjectRepository',
+        '@Project.Context.domain.ProjectFinder',
+      ]
+  Project.Context.domain.ProjectFinder:
+    class: ../../../../context/Project/domain/ProjectFinder
+    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+  Project.Context.infrastructure.ProjectRepository:
+    class: ../../../../context/Project/infrastructure/DrizzleProjectRepository

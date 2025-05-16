@@ -9,7 +9,10 @@ export class UserFinderDomain {
   async run(userId: string): Promise<User> {
     const userIdVO = new Uuidv7(userId)
     const user = await this.repository.findById(userIdVO)
-    if (!user) throw new NotExistError('User not exist')
-    return user
+    if (!user) {
+      throw new NotExistError('User not exist')
+    }
+
+    return user.get()
   }
 }

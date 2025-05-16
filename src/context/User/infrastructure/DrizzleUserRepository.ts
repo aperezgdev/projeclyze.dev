@@ -5,8 +5,6 @@ import { User } from '../domain/User'
 import { UserRepository } from '../domain/UserRepository'
 import { user } from './DrizzleUser.schema'
 import { Uuidv7 } from '../../Shared/domain/value-object/Uuidv7'
-import { UserName } from '../domain/value-object/UserName'
-import { EmailValueObject } from '../../Shared/domain/value-object/EmailValueObject'
 
 export class DrizzleUserRepository
   extends DrizzleRepository<User>
@@ -25,11 +23,15 @@ export class DrizzleUserRepository
       .select()
       .from(this.schema())
       .where(eq(this.schema().id, id.value))
-    if (result.length === 0) return undefined
-    return new User(
-      new Uuidv7(result[0].id),
-      new UserName(result[0].name),
-      new EmailValueObject(result[0].email),
+    if (result.length === 0) return Optional.empty()
+    return Optional.of(
+      User.fromPrimitives({
+        id: result[0].id,
+        name: result[0].name,
+        email: result[0].email,
+        createdOn: result[0].created_on.toISOString(),
+        updatedOn: result[0].updated_on.toISOString(),
+      }),
     )
   }
 

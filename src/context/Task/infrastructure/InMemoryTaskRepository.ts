@@ -26,7 +26,7 @@ export class InMemoryTaskRepository
 
   async findById(id: Uuidv7): Promise<Optional<Task>> {
     const result = this.searchAll().find((t) => t.id.value === id.value)
-    return result
+    return Optional.of(result!)
   }
 
   async findByOwner(ownerId: Uuidv7): Promise<Task[]> {

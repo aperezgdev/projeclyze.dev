@@ -9,6 +9,6 @@ export function registerRoutes(router: Router) {
 function register(routePath: string, app: Router) {
   const splitedPath = routePath.split('\\')
   const finalPath = splitedPath.at(splitedPath.length - 1) as string
-  const route = require(finalPath)
-  route.register(app)
+  const route = import(finalPath)
+  route.then((module) => module.register(app))
 }

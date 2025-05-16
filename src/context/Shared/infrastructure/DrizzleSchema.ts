@@ -1,3 +1,4 @@
 import { PgTableWithColumns } from 'drizzle-orm/pg-core'
 
-export interface DrizzleSchema extends PgTableWithColumns<any> {}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type DrizzleSchema = PgTableWithColumns<any>

@@ -10,10 +10,10 @@ export class TaskFinder {
     const taskIdVO = new Uuidv7(taskId)
     const task = await this.repository.findById(taskIdVO)
 
-    if (!task) {
+    if (!task.isPresent()) {
       throw new NotExistError(`Task with id ${taskIdVO.value} does not exist`)
     }
 
-    return task
+    return task.get()
   }
 }

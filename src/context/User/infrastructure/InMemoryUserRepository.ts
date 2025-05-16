@@ -25,7 +25,7 @@ export class InMemoryUserRepository
 
   async findById(id: Uuidv7): Promise<Optional<User>> {
     const result = this.searchAll().find((t) => t.id.value === id.value)
-    return result
+    return Optional.of(result!)
   }
 
   async update(user: User): Promise<User> {

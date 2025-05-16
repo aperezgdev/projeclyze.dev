@@ -5,7 +5,7 @@ import { DrizzleRepository } from '../../Shared/infrastructure/DrizzleRepository
 import { DrizzleSchema } from '../../Shared/infrastructure/DrizzleSchema'
 import { Project } from '../domain/Project'
 import { ProjectRepository } from '../domain/ProjectRepository'
-import { project } from './DrizzleProject.schema'
+import { project, projectToUser } from './DrizzleProject.schema'
 
 export class DrizzleProjectRepository
   extends DrizzleRepository<Project>
@@ -22,27 +22,64 @@ export class DrizzleProjectRepository
       .where(eq(this.schema().owner, owner.value))
     if (result.length === 0) return []
 
+    const resultMembers = await this.db
+      .select({ user_id: projectToUser.user_id })
+      .from(projectToUser)
+      .where(eq(projectToUser.project_id, result[0].id))
+
     return result.map((result) =>
       Project.fromPrimitives({
         id: result.id,
         title: result.title,
         description: result.description,
         owner: result.owner,
+        members: resultMembers.map((resultMember) => resultMember.user_id),
         createdOn: result.created_on,
         updatedOn: result.updated_on,
       }),
     )
   }
-  findById(id: Uuidv7): Promise<Optional<Project>> {
-    throw new Error('Method not implemented.')
+  async findById(id: Uuidv7): Promise<Optional<Project>> {
+    const result = await this.db
+      .select()
+      .from(this.schema())
+      .where(eq(this.schema().id, id.value))
+
+    if (result.length === 0) Optional.empty()
+
+    const resultMembers = await this.db
+      .select({ user_id: projectToUser.user_id })
+      .from(projectToUser)
+      .where(eq(projectToUser.project_id, result[0].id))
+
+    return Optional.of(
+      Project.fromPrimitives({
+        id: result[0].id,
+        title: result[0].title,
+        description: result[0].description,
+        owner: result[0].owner,
+        members: resultMembers.map((resultMember) => resultMember.user_id),
+        createdOn: result[0].created_on,
+        updatedOn: result[0].updated_on,
+      }),
+    )
   }
-  save(project: Project): Promise<Project> {
-    throw new Error('Method not implemented.')
+
+  async save(project: Project): Promise<Project> {
+    return await this.save(project)
   }
-  update(project: Project): Promise<Project> {
-    throw new Error('Method not implemented.')
+  async update(project: Project): Promise<Project> {
+    const projectToUpdate = project.toPrimitives()
+
+    const result = await this.db
+      .update(this.schema())
+      .set(projectToUpdate)
+      .where(eq(this.schema().id, project.id.value))
+
+    return result.rows[0]
   }
-  delete(project: Project): Promise<void> {
-    throw new Error('Method not implemented.')
+
+  async delete(id: Uuidv7): Promise<void> {
+    await this.db.delete(this.schema()).where(eq(this.schema().id, id.value))
   }
 }

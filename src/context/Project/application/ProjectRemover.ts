@@ -10,7 +10,7 @@ export class ProjectRemover {
     this.finder = new ProjectFinder(repository)
   }
 
-  async run(id: string): Promise<void> {
+  async run({ id }: { id: string }): Promise<void> {
     await this.finder.run({ id })
 
     return this.repository.delete(new Uuidv7(id))

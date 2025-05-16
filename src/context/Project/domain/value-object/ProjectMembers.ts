@@ -13,20 +13,20 @@ export class ProjectMembers extends ArrayValueObject<Uuidv7> {
     }
   }
 
-  add(member: Uuidv7) {
+  add(member: Uuidv7): ProjectMembers {
     const result = this.value.find((m) => m.equals(member))
     if (result) {
       throw new Error(`ProjectMembers already has member ${member.value}`)
     }
 
-    return [...this.value, member]
+    return new ProjectMembers([...this.value, member])
   }
 
-  remove(member: Uuidv7) {
+  remove(member: Uuidv7): ProjectMembers {
     const result = this.value.find((m) => m.equals(member))
     if (!result) {
       throw new Error(`ProjectMembers does not have member ${member.value}`)
     }
-    return this.value.filter((m) => !m.equals(member))
+    return new ProjectMembers(this.value.filter((m) => !m.equals(member)))
   }
 }

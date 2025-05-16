@@ -7,8 +7,7 @@ const loader = new YamlFileLoader(container)
 const env = process.env.ENV || 'test'
 
 export const loadContainer = async () => {
-  return new Promise<void>((resolve, reject) => {
-    console.log(`${__dirname}/application${env != 'prod' ? '_' + env : ''}.yaml`)
+  return new Promise<void>((resolve) => {
     loader
       .load(`${__dirname}/application${env != 'prod' ? '_' + env : ''}.yaml`)
       .then(() => {

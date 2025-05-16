@@ -6,5 +6,5 @@ export interface ProjectRepository {
   findById(id: Uuidv7): Promise<Optional<Project>>
   save(project: Project): Promise<Project>
   update(project: Project): Promise<Project>
-  delete(project: Project): Promise<void>
+  delete(id: Uuidv7): Promise<void>
 }

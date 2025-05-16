@@ -10,10 +10,10 @@ export class ProjectFinder {
     const projectId = new Uuidv7(id)
 
     const project = await this.repository.findById(projectId)
-    if (!project) {
+    if (!project.isPresent()) {
       throw new NotExistError(`Project with id ${id} not found`)
     }
 
-    return project
+    return project.get()
   }
 }

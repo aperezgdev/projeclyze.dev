@@ -2,3 +2,4 @@ imports:
   - { resource: ./Status/application.yaml }
   - { resource: ./User/application.yaml }
   - { resource: ./Task/application.yaml }
+  - { resource: ./Project/application.yaml }

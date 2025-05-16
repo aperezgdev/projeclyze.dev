@@ -26,14 +26,17 @@ export class DrizzleTaskRepository
       .select()
       .from(this.schema())
       .where(eq(this.schema().id, id.value))
-    if (result.length === 0) return undefined
-    return new Task(
-      new Uuidv7(result[0].id),
-      new TaskTitle(result[0].title),
-      new TaskDescription(result[0].description),
-      new Uuidv7(result[0].creator),
-      new CreatedOnValueObject(result[0].created_on),
-      new CreatedOnValueObject(result[0].updated_on),
+    if (result.length === 0) return Optional.empty()
+
+    return Optional.of(
+      Task.fromPrimitives({
+        id: result[0].id,
+        title: result[0].title,
+        description: result[0].description,
+        creator: result[0].creator,
+        createdOn: result[0].created_on.toISOString(),
+        updatedOn: result[0].updated_on.toISOString(),
+      }),
     )
   }
 

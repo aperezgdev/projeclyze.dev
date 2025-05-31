@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { ProjectRemover } from '../../../../context/Project/application/ProjectRemover'
-import { container } from '../../dependecy_injection'
+import { ProjectRemover } from '@projeclyze/context/Project/application/ProjectRemover'
+import { container } from '../../dependency_injection'
 
 export class ProjectDeleteController {
   async run(req: Request, res: Response) {

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { UserUpdater } from '../../../../context/User/application/UserUpdater'
-import { container } from '../../dependecy_injection'
+import { UserUpdater } from '@projeclyze/context/User/application/UserUpdater'
+import { container } from '../../dependency_injection'
 
 export class UserPutController {
   async run(req: Request, res: Response) {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { container } from '../../dependecy_injection'
+import { container } from '../../dependency_injection'
 
 export class ProjectPutMemberController {
   async run(req: Request, res: Response) {

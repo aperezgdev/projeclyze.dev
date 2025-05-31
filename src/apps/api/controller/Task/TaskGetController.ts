@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { TaskOwnerSearcher } from '../../../../context/Task/application/TaskOwnerSearcher'
-import { container } from '../../dependecy_injection'
+import { container } from '../../dependency_injection'
+import { TaskOwnerSearcher } from '@projeclyze/context/Task/application/TaskOwnerSearcher'
 
 export class TaskGetController {
   async run(req: Request, res: Response) {

@@ -9,7 +9,7 @@ services:
     class: ../../controller/User/UserPutController
 
   User.Context.infrastructure.UserRepository:
-    class: ../../../../context/User/infrastructure/InMemoryUserRepository
+    class: ../../../../context/User/infrastructure/DrizzleUserRepository
 
   User.Context.application.UserCreator:
     class: ../../../../context/User/application/UserCreator

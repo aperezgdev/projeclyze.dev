@@ -5,7 +5,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import * as http from 'http'
 import { registerRoutes } from './routes'
-import { loadContainer } from './dependecy_injection'
+import { loadContainer } from './dependency_injection'
 
 export class Server {
   private appExpress: Application

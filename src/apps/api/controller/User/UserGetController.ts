@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { UserFinder } from '../../../../context/User/application/UserFinder'
-import { container } from '../../dependecy_injection'
+import { UserFinder } from '@projeclyze/context/User/application/UserFinder'
+import { container } from '../../dependency_injection'
 
 export class UserGetController {
   async run(req: Request, res: Response) {

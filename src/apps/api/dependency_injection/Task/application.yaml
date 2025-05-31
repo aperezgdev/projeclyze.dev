@@ -12,7 +12,7 @@ services:
     class: ../../controller/Task/TaskDeleteController
 
   Task.Context.infrastructure.TaskRepository:
-    class: ../../../../context/Task/infrastructure/InMemoryTaskRepository
+    class: ../../../../context/Task/infrastructure/DrizzleTaskRepository
 
   Task.Context.application.TaskCreator:
     class: ../../../../context/Task/application/TaskCreator

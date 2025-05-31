@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { TaskGetController } from '../controller/Task/TaskGetController'
 import { TaskPostController } from '../controller/Task/TaskPostController'
-import { container } from '../dependecy_injection'
+import { container } from '../dependency_injection'
 import { TaskPutController } from '../controller/Task/TaskPutController'
 import { TaskDeleteController } from '../controller/Task/TaskDeleteController'
 

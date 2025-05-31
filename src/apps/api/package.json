@@ -1,0 +1,31 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "DOTENV_CONFIG_PATH=../../../.env ts-node-dev ./index.ts",
+    "build:tsc": "tsc -p tsconfig.json",
+    "build:di": "find dependency_injection -name '*.yaml' -exec cp --parents {} dist/apps/api \\;",
+    "build": "pnpm run build:tsc && pnpm run build:di",
+    "start": "cross-env NODE_ENV=test node dist/apps/api/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/body-parser": "^1.19.5",
+    "@types/cors": "^2.8.18",
+    "@types/express": "^4.17.22",
+    "@types/glob": "^8.1.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "express-promise-router": "^4.1.1",
+    "glob": "^10.4.5",
+    "node-dependency-injection": "^3.2.2"
+  },
+  "packageManager": "pnpm@10.11.0"
+}

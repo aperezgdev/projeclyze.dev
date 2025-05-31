@@ -18,7 +18,7 @@ export class DrizzleTaskRepository
   }
 
   async save(task: Task): Promise<void> {
-    await this.insert(task)
+    await this.insert(task.toPrimitives())
   }
 
   async findById(id: Uuidv7): Promise<Optional<Task>> {

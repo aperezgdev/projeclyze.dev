@@ -16,7 +16,8 @@ export abstract class DrizzleRepository<T extends object> {
     return result
   }
 
-  protected async insert(t: T): Promise<number> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected async insert(t: any): Promise<number> {
     const result = await this.db.insert(this.schema()).values(t)
     return result.rows.length
   }

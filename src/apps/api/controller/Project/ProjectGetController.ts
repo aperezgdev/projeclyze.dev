@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { ProjectOwnerSearcher } from '../../../../context/Project/application/ProjectOwnerSearcher'
-import { container } from '../../dependecy_injection'
+import { ProjectOwnerSearcher } from '@projeclyze/context/Project/application/ProjectOwnerSearcher'
+import { container } from '../../dependency_injection'
 
 export class ProjectGetController {
   async run(req: Request, res: Response) {

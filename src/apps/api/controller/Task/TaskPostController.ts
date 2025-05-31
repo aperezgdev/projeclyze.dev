@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { TaskCreator } from '../../../../context/Task/application/TaskCreator'
-import { container } from '../../dependecy_injection'
+import { TaskCreator } from '@projeclyze/context/Task/application/TaskCreator'
+import { container } from '../../dependency_injection'
 
 export class TaskPostController {
   async run(req: Request, res: Response) {

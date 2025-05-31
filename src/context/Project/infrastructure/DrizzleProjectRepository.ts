@@ -65,8 +65,8 @@ export class DrizzleProjectRepository
     )
   }
 
-  async save(project: Project): Promise<Project> {
-    return await this.save(project)
+  async save(project: Project): Promise<void> {
+    await this.insert(project.toPrimitives())
   }
   async update(project: Project): Promise<Project> {
     const projectToUpdate = project.toPrimitives()

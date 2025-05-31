@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { StatusGetController } from '../controller/StatusGetController'
-import { container } from '../dependecy_injection'
+import { container } from '../dependency_injection'
 
 export const register = (router: Router) => {
   const statusGetController: StatusGetController = container.get(

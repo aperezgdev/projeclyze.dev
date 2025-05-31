@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { container } from '../dependecy_injection'
+import { container } from '../dependency_injection'
 import { UserGetController } from '../controller/User/UserGetController'
 import { UserPostController } from '../controller/User/UserPostController'
 import { UserPutController } from '../controller/User/UserPutController'

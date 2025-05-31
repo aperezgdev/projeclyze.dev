@@ -15,7 +15,7 @@ export class DrizzleUserRepository
   }
 
   async save(user: User): Promise<void> {
-    await this.insert(user)
+    await this.insert(user.toPrimitives())
   }
 
   async findById(id: Uuidv7): Promise<Optional<User>> {

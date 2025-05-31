@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { container } from '../dependecy_injection'
+import { container } from '../dependency_injection'
 
 export const register = (router: Router) => {
   const projectGetController = container.get(

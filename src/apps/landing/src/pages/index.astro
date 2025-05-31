@@ -1,5 +1,5 @@
 ---
-
+import "../styles/global.css"
 ---
 
 <html lang="en">
@@ -9,6 +9,73 @@
 		<title>Astro</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<p class="font-bold z-10">Comming soon...</p>
+		<h1 class="text-6xl font-bold bg-gradient-to-r from-red-400 to-orange-400  text-transparent bg-clip-text h-20 z-10">projeclyze.dev</h1>
+		<p class="font-bold z-10">Web application to organize projects designed for developers</p>
+		<div class="pointer-events-none absolute inset-0 z-0">
+            <span class="letter left-[5%]" style="animation-duration: 12s; animation-delay: 0s;">
+                const
+            </span>
+            <span class="letter left-[15%]" style="animation-duration: 10s; animation-delay: 3s;">
+                function()
+            </span>
+            <span class="letter left-[25%]" style="animation-duration: 14s; animation-delay: 1s;">
+                let x = 42;
+            </span>
+            <span class="letter left-[35%]" style="animation-duration: 11s; animation-delay: 6s;">
+                if (true)
+            </span>
+            <span class="letter left-[45%]" style="animation-duration: 13s; animation-delay: 0.5s;">
+                return null;
+            </span>
+            <span class="letter left-[55%]" style="animation-duration: 9s; animation-delay: 4s;">
+                async await
+            </span>
+            <span class="letter left-[65%]" style="animation-duration: 15s; animation-delay: 7s; top: 0;">
+                await
+            </span>
+            <span class="letter left-[75%]" style="animation-duration: 10s; animation-delay: 1.5s; top: 0;">
+                tasks
+            </span>
+            <span class="letter left-[85%]" style="animation-duration: 12s; animation-delay: 3s; top: 0;">
+                import "tailwind"
+            </span>
+        </div>
 	</body>
 </html>
+
+
+<style>
+    body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5;
+        width: 100vw;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(90vh);
+            opacity: 0.15;
+        }
+        50% {
+            opacity: 0.5;
+        }
+        100% {
+            transform: translateY(0vh);
+            opacity: 0;
+        }
+    }
+
+    .letter {
+        animation: float linear infinite;
+        position: absolute;
+        font-size: 1.25rem;
+        font-family: monospace;
+        opacity: 0;
+        white-space: pre;
+    }
+</style>

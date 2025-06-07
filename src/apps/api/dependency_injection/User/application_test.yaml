@@ -13,7 +13,7 @@ services:
 
   User.Context.application.UserCreator:
     class: ../../../../context/User/application/UserCreator
-    arguments: ['@User.Context.infrastructure.UserRepository']
+    arguments: ['@User.Context.infrastructure.UserRepository', '@Shared.Context.infrastructure.ConsoleLogger']
 
   User.Context.application.UserUpdater:
     class: ../../../../context/User/application/UserUpdater
@@ -21,8 +21,9 @@ services:
       [
         '@User.Context.infrastructure.UserRepository',
         '@User.Context.application.UserFinder',
+        '@Shared.Context.infrastructure.ConsoleLogger',
       ]
 
   User.Context.application.UserFinder:
     class: ../../../../context/User/application/UserFinder
-    arguments: ['@User.Context.infrastructure.UserRepository']
+    arguments: ['@User.Context.infrastructure.UserRepository', '@Shared.Context.infrastructure.ConsoleLogger']

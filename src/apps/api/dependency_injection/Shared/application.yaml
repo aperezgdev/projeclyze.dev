@@ -1,0 +1,6 @@
+services:
+  Shared.Context.infrastructure.WinstonLogger:
+    class: ../../../../context/Shared/infrastructure/WinstonLogger
+
+  Shared.Context.infrastructure.ConsoleLogger:
+    class: ../../../../context/Shared/infrastructure/ConsoleLogger

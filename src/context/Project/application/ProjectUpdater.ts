@@ -1,3 +1,4 @@
+import { Logger } from '@projeclyze/context/Shared/domain/Logger'
 import { Uuidv7 } from '../../Shared/domain/value-object/Uuidv7'
 import { Project } from '../domain/Project'
 import { ProjectFinder } from '../domain/ProjectFinder'
@@ -9,8 +10,9 @@ export class ProjectUpdater {
   constructor(
     private repository: ProjectRepository,
     private finder: ProjectFinder,
+    private logger: Logger
   ) {
-    this.finder = new ProjectFinder(repository)
+    this.finder = new ProjectFinder(repository, logger)
   }
 
   async run({
@@ -24,7 +26,9 @@ export class ProjectUpdater {
     description: string
     owner: string
   }): Promise<Project> {
+    this.logger.log(`Updating project with id: ${id}, title: ${title}, description: ${description}, owner: ${owner}`)
     const project = await this.finder.run({ id: id })
+    
 
     const titleVO = new ProjectTitle(title)
     const descriptionVO = new ProjectDescription(description)
@@ -35,7 +39,8 @@ export class ProjectUpdater {
       description: descriptionVO,
       owner: ownerVO,
     })
+    this.logger.log(`Project with id: ${id} updated successfully`)
 
-    return this.repository.update(projectUpdated)
+    return await this.repository.update(projectUpdated)
   }
 }

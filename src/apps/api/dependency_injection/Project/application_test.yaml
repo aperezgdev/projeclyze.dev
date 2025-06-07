@@ -14,17 +14,18 @@ services:
 
   Project.Context.application.ProjectOwnerSearcher:
     class: ../../../../context/Project/application/ProjectOwnerSearcher
-    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+    arguments: ['@Project.Context.infrastructure.ProjectRepository', '@Shared.Context.infrastructure.ConsoleLogger']
 
   Project.Context.application.ProjectCreator:
     class: ../../../../context/Project/application/ProjectCreator
-    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+    arguments: ['@Project.Context.infrastructure.ProjectRepository', '@Shared.Context.infrastructure.ConsoleLogger']
   Project.Context.application.ProjectUpdater:
     class: ../../../../context/Project/application/ProjectUpdater
     arguments:
       [
         '@Project.Context.infrastructure.ProjectRepository',
         '@Project.Context.domain.ProjectFinder',
+        '@Shared.Context.infrastructure.ConsoleLogger', 
       ]
   Project.Context.application.ProjectRemover:
     class: ../../../../context/Project/application/ProjectRemover
@@ -32,6 +33,7 @@ services:
       [
         '@Project.Context.infrastructure.ProjectRepository',
         '@Project.Context.domain.ProjectFinder',
+        '@Shared.Context.infrastructure.ConsoleLogger',
       ]
   Project.Context.application.ProjectAddMember:
     class: ../../../../context/Project/application/ProjectAddMember
@@ -39,6 +41,7 @@ services:
       [
         '@Project.Context.infrastructure.ProjectRepository',
         '@Project.Context.domain.ProjectFinder',
+        '@Shared.Context.infrastructure.ConsoleLogger',
       ]
   Project.Context.application.ProjectRemoveMember:
     class: ../../../../context/Project/application/ProjectRemoveMember
@@ -49,6 +52,7 @@ services:
       ]
   Project.Context.domain.ProjectFinder:
     class: ../../../../context/Project/domain/ProjectFinder
-    arguments: ['@Project.Context.infrastructure.ProjectRepository']
+    arguments: ['@Project.Context.infrastructure.ProjectRepository', '@Shared.Context.infrastructure.ConsoleLogger']
+    
   Project.Context.infrastructure.ProjectRepository:
     class: ../../../../context/Project/infrastructure/InMemoryProjectRepository

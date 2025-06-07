@@ -13,10 +13,11 @@ services:
 
   Task.Context.infrastructure.TaskRepository:
     class: ../../../../context/Task/infrastructure/DrizzleTaskRepository
+    arguments: ['@Shared.Context.infrastructure.WinstonLogger']
 
   Task.Context.application.TaskCreator:
     class: ../../../../context/Task/application/TaskCreator
-    arguments: ['@Task.Context.infrastructure.TaskRepository']
+    arguments: ['@Task.Context.infrastructure.TaskRepository', '@Shared.Context.infrastructure.WinstonLogger']
 
   Task.Context.application.TaskUpdater:
     class: ../../../../context/Task/application/TaskUpdater
@@ -24,6 +25,7 @@ services:
       [
         '@Task.Context.infrastructure.TaskRepository',
         '@Task.Context.application.TaskFinder',
+        '@Shared.Context.infrastructure.WinstonLogger',
       ]
 
   Task.Context.application.TaskRemover:
@@ -32,12 +34,13 @@ services:
       [
         '@Task.Context.infrastructure.TaskRepository',
         '@Task.Context.application.TaskFinder',
+        '@Shared.Context.infrastructure.WinstonLogger',
       ]
 
   Task.Context.application.TaskOwnerSearcher:
     class: ../../../../context/Task/application/TaskOwnerSearcher
-    arguments: ['@Task.Context.infrastructure.TaskRepository']
+    arguments: ['@Task.Context.infrastructure.TaskRepository', '@Shared.Context.infrastructure.WinstonLogger']
 
   Task.Context.application.TaskFinder:
     class: ../../../../context/Task/domain/TaskFinder
-    arguments: ['@Task.Context.infrastructure.TaskRepository']
+    arguments: ['@Task.Context.infrastructure.TaskRepository', '@Shared.Context.infrastructure.WinstonLogger']

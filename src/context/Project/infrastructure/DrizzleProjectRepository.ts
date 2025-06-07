@@ -8,7 +8,7 @@ import { ProjectRepository } from '../domain/ProjectRepository'
 import { project, projectToUser } from './DrizzleProject.schema'
 
 export class DrizzleProjectRepository
-  extends DrizzleRepository<Project>
+  extends DrizzleRepository
   implements ProjectRepository
 {
   protected schema(): DrizzleSchema {

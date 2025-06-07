@@ -7,12 +7,23 @@ import { TaskTitle } from '../domain/value-object/TaskTitle'
 export class TaskCreator {
   constructor(private repository: TaskRepository) {}
 
-  async run(title: string, description: string, creatorId: string): Promise<void> {
+  async run({
+    title,
+    description,
+    creator,
+    project,
+  }: {
+    title: string
+    description: string
+    creator: string
+    project: string
+  }): Promise<void> {
     const titleVO = new TaskTitle(title)
     const descriptionVO = new TaskDescription(description)
-    const creatorIdVO = new Uuidv7(creatorId)
+    const creatorIdVO = new Uuidv7(creator)
+    const projectIdVO = new Uuidv7(project)
 
-    const task = Task.create(titleVO, descriptionVO, creatorIdVO)
+    const task = Task.create(titleVO, descriptionVO, creatorIdVO, projectIdVO)
     return this.repository.save(task)
   }
 }

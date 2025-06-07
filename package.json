@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "cross-env ENV=test cucumber-js -p api",
+    "build": "pnpm run --filter api build && pnpm run --filter landing build && pnpm run --filter mcp build && pnpm run --filter frontend build",
     "lint": "eslint --ext .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "db:generate": "npx drizzle-kit generate",
-    "db:migrate": "npx drizzle-kit migrate",
+    "db:generate": "pnpm drizzle-kit generate",
+    "db:migrate": "pnpm drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "start": "node dist/src/apps/api/index.js"
   },

@@ -4,3 +4,4 @@ dist
 .env
 pgadmin-data
 postgres-data
+.vscode

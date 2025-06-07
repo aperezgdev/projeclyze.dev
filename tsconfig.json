@@ -12,7 +12,11 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "noUnusedLocals": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "@projeclyze/context/*": ["src/context/*"]
+    }
   },
   "include": ["src/**/**.ts", "tests/**/**.ts"],
   "exclude": ["node_modules", "tests", "dist"]

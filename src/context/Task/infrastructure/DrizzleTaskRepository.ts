@@ -9,10 +9,7 @@ import { TaskTitle } from '../domain/value-object/TaskTitle'
 import { TaskDescription } from '../domain/value-object/TaskDescription'
 import { CreatedOnValueObject } from '../../Shared/domain/value-object/CreatedOnValueObject'
 
-export class DrizzleTaskRepository
-  extends DrizzleRepository<Task>
-  implements TaskRepository
-{
+export class DrizzleTaskRepository extends DrizzleRepository implements TaskRepository {
   protected schema() {
     return task
   }
@@ -34,6 +31,7 @@ export class DrizzleTaskRepository
         title: result[0].title,
         description: result[0].description,
         creator: result[0].creator,
+        project: result[0].project,
         createdOn: result[0].created_on.toISOString(),
         updatedOn: result[0].updated_on.toISOString(),
       }),
@@ -52,6 +50,26 @@ export class DrizzleTaskRepository
           new TaskTitle(result.title),
           new TaskDescription(result.description),
           new Uuidv7(result.creator),
+          new Uuidv7(result.project),
+          new CreatedOnValueObject(result.created_on),
+          new CreatedOnValueObject(result.updated_on),
+        ),
+    )
+  }
+
+  async findByProject(projectId: Uuidv7): Promise<Task[]> {
+    const results = await this.db
+      .select()
+      .from(this.schema())
+      .where(eq(this.schema().project, projectId.value))
+    return results.map(
+      (result) =>
+        new Task(
+          new Uuidv7(result.id),
+          new TaskTitle(result.title),
+          new TaskDescription(result.description),
+          new Uuidv7(result.creator),
+          new Uuidv7(result.project),
           new CreatedOnValueObject(result.created_on),
           new CreatedOnValueObject(result.updated_on),
         ),

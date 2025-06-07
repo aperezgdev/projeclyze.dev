@@ -6,6 +6,7 @@ export interface TaskRepository {
   save(task: Task): Promise<void>
   findByOwner(ownerId: Uuidv7): Promise<Task[]>
   findById(taskId: Uuidv7): Promise<Optional<Task>>
+  findByProject(projectId: Uuidv7): Promise<Task[]>
   update(task: Task): Promise<Task>
   delete(taskId: Uuidv7): Promise<void>
 }

@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "../../",
-    "baseUrl": "./",
-    "paths": {
-      "@projeclyze/context/*": ["../../context/*"]
-    }
+    "rootDir": "../../"
   },
   "extends": "../../../tsconfig.json"
 }

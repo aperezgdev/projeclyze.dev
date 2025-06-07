@@ -15,6 +15,7 @@ export class InMemoryTaskRepository
       title: 'Task 1',
       description: 'Task 1 description',
       creator: '0196959b-349e-7683-a2ab-24ea33d93662',
+      project: '0196959b-349e-7683-a2ab-24ea33d93662',
       createdOn: '2022-01-01T00:00:00.000Z',
       updatedOn: '2022-01-01T00:00:00.000Z',
     }),
@@ -31,6 +32,11 @@ export class InMemoryTaskRepository
 
   async findByOwner(ownerId: Uuidv7): Promise<Task[]> {
     const results = this.searchAll().filter((t) => t.creator.value === ownerId.value)
+    return results
+  }
+
+  async findByProject(projectId: Uuidv7): Promise<Task[]> {
+    const results = this.searchAll().filter((t) => t.project.value === projectId.value)
     return results
   }
 

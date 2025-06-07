@@ -13,10 +13,24 @@ export class TaskUpdater {
     this.finder = new TaskFinder(repository)
   }
 
-  async run(taskId: string, title: string, description: string): Promise<Task> {
+  async run({
+    taskId,
+    title,
+    description,
+    creator,
+    project,
+  }: {
+    taskId: string
+    title: string
+    description: string
+    creator: string
+    project: string
+  }): Promise<Task> {
     const taskIdVO = new Uuidv7(taskId)
     const titleVO = new TaskTitle(title)
     const descriptionVO = new TaskDescription(description)
+    const projectVO = new Uuidv7(project)
+    const creatorVO = new Uuidv7(creator)
 
     const task = await this.finder.run(taskId)
 
@@ -24,7 +38,8 @@ export class TaskUpdater {
       taskIdVO,
       titleVO,
       descriptionVO,
-      task.creator,
+      creatorVO,
+      projectVO,
       task.createdOn,
       task.updatedOn,
     )

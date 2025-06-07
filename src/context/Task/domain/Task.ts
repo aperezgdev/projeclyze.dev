@@ -9,6 +9,7 @@ interface TaskPrimitives {
   title: string
   description: string
   creator: string
+  project: string
   createdOn: string
   updatedOn: string
 }
@@ -18,6 +19,7 @@ export class Task {
   readonly title: TaskTitle
   readonly description: TaskDescription
   readonly creator: Uuidv7
+  readonly project: Uuidv7
   readonly createdOn: CreatedOnValueObject
   readonly updatedOn: UpdatedOnValueObject
 
@@ -26,6 +28,7 @@ export class Task {
     title: TaskTitle,
     description: TaskDescription,
     creator: Uuidv7,
+    project: Uuidv7,
     createdOn?: CreatedOnValueObject,
     updatedOn?: UpdatedOnValueObject,
   ) {
@@ -33,13 +36,19 @@ export class Task {
     this.title = title
     this.description = description
     this.creator = creator
+    this.project = project
     this.createdOn = createdOn ?? new CreatedOnValueObject()
     this.updatedOn = updatedOn ?? new UpdatedOnValueObject()
   }
 
-  static create(title: TaskTitle, description: TaskDescription, creator: Uuidv7): Task {
+  static create(
+    title: TaskTitle,
+    description: TaskDescription,
+    creator: Uuidv7,
+    project: Uuidv7,
+  ): Task {
     const id = Uuidv7.random()
-    return new Task(id, title, description, creator)
+    return new Task(id, title, description, creator, project)
   }
 
   static fromPrimitives({
@@ -47,6 +56,7 @@ export class Task {
     title,
     description,
     creator,
+    project,
     createdOn,
     updatedOn,
   }: TaskPrimitives): Task {
@@ -54,9 +64,18 @@ export class Task {
     const titleVO = new TaskTitle(title)
     const descriptionVO = new TaskDescription(description)
     const creatorVO = new Uuidv7(creator)
+    const projectVO = new Uuidv7(project)
     const createdOnVO = new CreatedOnValueObject(new Date(createdOn))
     const updatedOnVO = new UpdatedOnValueObject(new Date(updatedOn))
-    return new Task(idVO, titleVO, descriptionVO, creatorVO, createdOnVO, updatedOnVO)
+    return new Task(
+      idVO,
+      titleVO,
+      descriptionVO,
+      creatorVO,
+      projectVO,
+      createdOnVO,
+      updatedOnVO,
+    )
   }
 
   toPrimitives(): TaskPrimitives {
@@ -65,6 +84,7 @@ export class Task {
       title: this.title.value,
       description: this.description.value,
       creator: this.creator.value,
+      project: this.project.value,
       createdOn: this.createdOn.value.toISOString(),
       updatedOn: this.updatedOn.value.toISOString(),
     }

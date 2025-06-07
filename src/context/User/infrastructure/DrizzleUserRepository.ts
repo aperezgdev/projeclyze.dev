@@ -6,10 +6,7 @@ import { UserRepository } from '../domain/UserRepository'
 import { user } from './DrizzleUser.schema'
 import { Uuidv7 } from '../../Shared/domain/value-object/Uuidv7'
 
-export class DrizzleUserRepository
-  extends DrizzleRepository<User>
-  implements UserRepository
-{
+export class DrizzleUserRepository extends DrizzleRepository implements UserRepository {
   protected schema() {
     return user
   }

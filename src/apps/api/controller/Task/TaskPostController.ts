@@ -5,7 +5,12 @@ import { container } from '../../dependency_injection'
 export class TaskPostController {
   async run(req: Request, res: Response) {
     const creator: TaskCreator = container.get('Task.Context.application.TaskCreator')
-    await creator.run(req.body.title, req.body.description, req.body.creator)
+    await creator.run({
+      title: req.body.title,
+      description: req.body.description,
+      creator: req.body.creator,
+      project: req.body.project,
+    })
     res.status(201).send()
   }
 }

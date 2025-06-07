@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { DrizzleSchema } from './DrizzleSchema'
 import { drizzle } from 'drizzle-orm/node-postgres'
 
-export abstract class DrizzleRepository<T extends object> {
+export abstract class DrizzleRepository {
   protected db: ReturnType<typeof drizzle>
 
   constructor() {

@@ -269,9 +269,8 @@ components:
           type: string
         creator:
           type: string
-        dueDate:
+        project:
           type: string
-          format: date-time
         createdOn:
           type: string
           format: date-time
@@ -280,7 +279,7 @@ components:
           format: date-time
     TaskCreate:
       type: object
-      required: [title, description, dueDate, creator]
+      required: [title, description, dueDate, creator, project]
       properties:
         title:
           type: string
@@ -291,6 +290,8 @@ components:
           format: date-time
         creator:
           type: string
+        project:
+          type: string
     TaskUpdate:
       type: object
       properties:
@@ -298,6 +299,7 @@ components:
           type: string
         description:
           type: string
-        dueDate:
+        project:
           type: string
-          format: date-time
+        creator:
+          type: string
